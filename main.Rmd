@@ -2,7 +2,9 @@
 title: "CaseStudy2"
 author: "Dawkins"
 date: "2/6/2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -268,8 +270,7 @@ Other interesting trends:
 - R&D Research Scientist ~20% and R&D Lab Techs ~19% are have the third and fourth highest turnover rates
 
 
-## Appendix
-
+# Appendix:
 # Get Box Plots for Numerical Columns
 ```{r}
 
