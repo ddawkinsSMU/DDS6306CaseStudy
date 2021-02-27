@@ -36,7 +36,7 @@ num_fact = c("Attrition","RelationshipSatisfaction", "StockOptionLevel", "WorkLi
 # Create "Legacy" column and unite "Department" & "JobRole"
 df <- as.data.frame(CaseStudy2_data) %>%
   select(-all_of(removed_columns)) %>%
-  mutate(Legacy = YearsInCurrentRole*Education*StockOptionLevel*JobLevel*EnvironmentSatisfaction*RelationshipSatisfaction*MonthlyIncome/Age) %>%
+  mutate(Legacy = YearsInCurrentRole*TotalWorkingYears*JobLevel*EnvironmentSatisfaction*MonthlyIncome*Age) %>%
   unite("DeptRole",Department, JobRole)
 
 # Convert "num_fact" cols to factors
@@ -95,14 +95,12 @@ bar_attr_deptRole
 
 ```
 
-
-
 # Build and Cross Validate Naive Bayes Model
 ```{r}
 
 
 # Features included in the model
-features <- c("MaritalStatus", "OverTime", "DeptRole", "Legacy", "MonthlyIncome", "TotalWorkingYears", "YearsInCurrentRole")
+features <- c("MaritalStatus", "OverTime", "DeptRole", "Legacy", "MonthlyIncome", "TotalWorkingYears", "YearsInCurrentRole", "StockOptionLevel", "DistanceFromHome", "YearsAtCompany","BusinessTravel", "JobInvolvement")
 
 iterations = 100
 
@@ -164,9 +162,18 @@ df_no_attr <- as.data.frame(CaseStudy2CompSet_No_Attrition) %>%
 model = naiveBayes(df[,features], df$Attrition)
 # Get and save model predictions with ID label, to table_predictions
 model_predictions = predict(model, df_no_attr[,features])
-attr_table_perdictions = table(df_no_attr$ID, model_predictions)
+model_predictions = as.data.frame(model_predictions)
+df_no_attr_id = as.data.frame(df_no_attr$ID)
+
+# Renam columns
+colnames(model_predictions) <- "Attrition"
+colnames(df_no_attr_id) <- "ID"
+
+# Bind colummns
+attr_table_perdictions = cbind(df_no_attr_id, model_predictions)
+
 # Write table_perdictions to CSV
-write.csv(attr_table_perdictions, file = "Case2PredictionsClassifyDawkins.csv")
+write.csv(attr_table_perdictions, file = "Case2PredictionsClassifyDawkins.csv", row.names=FALSE)
 
 ```
 
@@ -183,8 +190,9 @@ set.seed(4)
 ## More Stable Measure ... Average of many MSPEs
 
 numMSPEs = 500
-MSPEHolderModel1 = numeric(numMSPEs)
-MSPEHolderModel2 = numeric(numMSPEs)
+RMSE = numeric(numMSPEs)
+AdjRSquared = numeric(numMSPEs)
+RSquared = numeric(numMSPEs)
 
 for (i in 1:numMSPEs)
 {
@@ -197,22 +205,19 @@ for (i in 1:numMSPEs)
   
   salary_model_predictions = predict(salary_model, newdata = salary_test)
   
-  #MSPE Model 1
-  MSPE = mean((salary_test$MonthlyIncome - salary_model_predictions)^2)
-  MSPEHolderModel1[i] = MSPE
-  AdjRSquared = summary(salary_model)$r.squared
+  
+  RMSE[i] = sqrt(mean(salary_model$residuals^2))
+  RSquared[i] = summary(salary_model)$r.squared
+  AdjRSquared[i] = summary(salary_model)$adj.r.squared
   
 }
 
-mean(MSPEHolderModel1)
-sqrt(mean(MSPEHolderModel1))
-
-# # R Squared
-# summary(salary_model)$r.squared
-# # Adj R Squared
-# summary(salary_model)$adj.r.squared
-# # Root Mean Square Error
-# sqrt(mean(salary_model$residuals^2))
+# R Squared
+mean(RMSE)
+# Adj R Squared
+mean(RSquared)
+# Root Mean Square Error
+mean(AdjRSquared)
 
 ```
 
@@ -223,24 +228,32 @@ CaseStudy2CompSet_No_Salary <- read_excel("C:/Users/OaklandHillsMansion/Desktop/
 df_no_salary <- as.data.frame(CaseStudy2CompSet_No_Salary)
 
 # Create MLR model, using data with a salary
-salary_model = lm(MonthlyIncome ~ TotalWorkingYears*Education*EducationField+
-             BusinessTravel*JobLevel*JobRole,
-                data = df_salary)
-
+salary_model = lm(MonthlyIncome ~ TotalWorkingYears+BusinessTravel+
+           JobLevel*JobRole, data = df_salary)
 
 # Get and save model predictions with ID label, to table_predictions
 salary_model_predictions = predict(salary_model, newdata = df_no_salary)
-salary_table_perdictions = table(df_no_salary$ID, salary_model_predictions)
+salary_model_predictions = as.data.frame(salary_model_predictions)
+
+# Save as Dataframe
+df_no_salary_id = as.data.frame(df_no_salary$ID)
+
+# Rename Columns
+colnames(salary_model_predictions) <- "MonthlyIncome"
+colnames(df_no_salary_id) <- "ID"
+
+# Bind columns
+salary_table_perdictions = cbind(df_no_salary_id, salary_model_predictions)
 
 # Write table_perdictions to CSV
-write.csv(table_perdictions, file = "Case2PredictionsRegressDawkins.csv")
+write.csv(salary_table_perdictions, file = "Case2PredictionsRegressDawkins.csv", row.names=FALSE)
 
 ```
 
 
 Executive Summary:    
 
-The attrition model had an average accuracy of 73.5%, an average specification of 75.3% and an average sensitivity of 64.7%. A Legacy attribute was derived from existing features in the data set and was applied to each employee, to aid in the predicting attrition. 
+The attrition model had an average accuracy of ~78%, an average specification of ~81% and an average sensitivity of ~65%. A Legacy attribute was derived from existing features in the data set and was applied to each employee, to aid in the predicting attrition. 
 
 The salary model had root mean square error of $962 and Adj. R-squared of 94.8%.
 
@@ -255,7 +268,7 @@ Other interesting trends:
 - R&D Research Scientist ~20% and R&D Lab Techs ~19% are have the third and fourth highest turnover rates
 
 
-## Index Begins
+## Appendix
 
 # Get Box Plots for Numerical Columns
 ```{r}
