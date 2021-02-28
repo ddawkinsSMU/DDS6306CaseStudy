@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Dawkins" />
+
+
+<title>CaseStudy2</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DJs Lab</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="main.html">DS6306: CaseStudy2</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">CaseStudy2</h1>
+<h4 class="author">Dawkins</h4>
+<h4 class="date">2/6/2021</h4>
+
+</div>
+
+
+<div id="libraries" class="section level2">
+<h2>Libraries</h2>
+<pre class="r"><code>library(tidyr)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+library(caret)
+library(e1071)</code></pre>
+</div>
+<div id="load-data" class="section level2">
+<h2>Load Data</h2>
+<pre class="r"><code>CaseStudy2_data &lt;- read_csv(&quot;CaseStudy2-data.csv&quot;)</code></pre>
+<pre><code>## 
+## -- Column specification ------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   Attrition = col_character(),
+##   BusinessTravel = col_character(),
+##   Department = col_character(),
+##   EducationField = col_character(),
+##   Gender = col_character(),
+##   JobRole = col_character(),
+##   MaritalStatus = col_character(),
+##   Over18 = col_character(),
+##   OverTime = col_character()
+## )
+## [36mi[39m Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code># Columns that need to be removed
+removed_columns = c(&quot;ID&quot;, &quot;EmployeeCount&quot;, &quot;StandardHours&quot;)
+
+# Numerical Columns that, need to be converted to factors
+num_fact = c(&quot;Attrition&quot;,&quot;RelationshipSatisfaction&quot;, &quot;StockOptionLevel&quot;, &quot;WorkLifeBalance&quot;, &quot;JobSatisfaction&quot;, &quot;PerformanceRating&quot;, &quot;EnvironmentSatisfaction&quot;, &quot;JobInvolvement&quot;, &quot;JobLevel&quot;, &quot;Education&quot;)
+
+
+# Remove &quot;removed_columns&quot; from data set
+# Create &quot;Legacy&quot; column and unite &quot;Department&quot; &amp; &quot;JobRole&quot;
+df &lt;- as.data.frame(CaseStudy2_data) %&gt;%
+  select(-all_of(removed_columns)) %&gt;%
+  mutate(Legacy = YearsInCurrentRole*TotalWorkingYears*JobLevel*EnvironmentSatisfaction*MonthlyIncome*Age) %&gt;%
+  unite(&quot;DeptRole&quot;,Department, JobRole)
+
+# Convert &quot;num_fact&quot; cols to factors
+for (i in 1:length(num_fact)){
+  df[,num_fact[i]] &lt;- as.factor(df[,num_fact[i]])
+}
+
+# Selects all &quot;char&quot; &amp; &quot;factor&quot; columns
+df_char_fac &lt;- df %&gt;%
+  select_if(function(col) is.character(col) | is.factor(col))
+
+# Selects all &quot;numeric&quot; columns and keeps the &quot;Attrition&quot; column
+df_nums &lt;- df %&gt;%
+  select_if(function(col) is.numeric(col)) 
+
+# Summary
+summary(df$Attrition)</code></pre>
+<pre><code>##  No Yes 
+## 730 140</code></pre>
+<pre class="r"><code>summary(df$MonthlyIncome)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1081    2840    4946    6390    8182   19999</code></pre>
+</div>
+<div id="box-plot-yearsincurrentrole-vs-dept-role" class="section level1">
+<h1>Box Plot: YearsInCurrentRole vs Dept Role</h1>
+<pre class="r"><code># Box Plot: YearsInCurrentRole vs Dept Role
+  plot_yrRole_deptRole &lt;- df %&gt;%
+    ggplot(aes_string(y=&quot;YearsInCurrentRole&quot;,x=&quot;DeptRole&quot;, color=&quot;Attrition&quot;))+
+    geom_boxplot()+
+    theme(axis.text.x=element_text(angle=45,hjust=1))
+
+plot_yrRole_deptRole</code></pre>
+<p><img src="main_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="box-plot-yearswithcurrmanager-vs-dept-role" class="section level1">
+<h1>Box Plot: YearsWithCurrManager vs Dept Role</h1>
+<pre class="r"><code># Box Plot: YearsWithCurrManager vs Dept Role
+plot_yrMgr_deptRole  &lt;- df %&gt;%
+  ggplot(aes_string(y=&quot;YearsWithCurrManager&quot;,x=&quot;DeptRole&quot;, color=&quot;Attrition&quot;))+
+  geom_boxplot()+
+  theme(axis.text.x=element_text(angle=45,hjust=1))
+
+plot_yrMgr_deptRole</code></pre>
+<p><img src="main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="bar-graph-attritionn-count-by-dept-role" class="section level1">
+<h1>Bar Graph: Attritionn Count by Dept Role</h1>
+<pre class="r"><code>bar_attr_deptRole &lt;- df %&gt;%
+  ggplot(aes_string(x=&quot;DeptRole&quot;, fill=&quot;Attrition&quot;))+
+  geom_bar(position = &quot;dodge&quot;)+
+  geom_text(stat=&#39;count&#39;, aes(label=..count..), vjust=-1)+
+  theme(axis.text.x=element_text(angle=45,hjust=1))
+
+bar_attr_deptRole</code></pre>
+<p><img src="main_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="build-and-cross-validate-naive-bayes-model" class="section level1">
+<h1>Build and Cross Validate Naive Bayes Model</h1>
+<pre class="r"><code># Features included in the model
+features &lt;- c(&quot;MaritalStatus&quot;, &quot;OverTime&quot;, &quot;DeptRole&quot;, &quot;Legacy&quot;, &quot;MonthlyIncome&quot;, &quot;TotalWorkingYears&quot;, &quot;YearsInCurrentRole&quot;, &quot;StockOptionLevel&quot;, &quot;DistanceFromHome&quot;, &quot;YearsAtCompany&quot;,&quot;BusinessTravel&quot;, &quot;JobInvolvement&quot;)
+
+iterations = 100
+
+# Initialize Matrix
+masterAcc = matrix(nrow=iterations)
+masterSens = matrix(nrow=iterations)
+masterSpcf = matrix(nrow=iterations)
+
+# Set split percentage
+splitPerc = .7
+
+# Loop through model runs
+set.seed(5)
+for(j in 1:iterations)
+{
+  # Get trainIndices
+  trainIndices = sample(1:dim(df)[1], round(splitPerc*dim(df)[1]))
+  # Get train data frame
+  train = df[trainIndices,]
+  # Get test data frame
+  test = df[-trainIndices,]
+  
+  # Create model using the train data frame
+  model = naiveBayes(train[,features], train$Attrition)
+  # Create table
+  table(predict(model, test[,features]), test$Attrition)
+  # Get Confusion Matrix
+  CM = confusionMatrix(table(predict(model, test[,features]), test$Attrition), positive = &quot;Yes&quot;)
+  # Pull Accuracy, Sensitivity and Specification from confusion matrix
+  masterAcc[j] = CM$overall[1]
+  masterSens[j] = CM$byClass[1]
+  masterSpcf[j] = CM$byClass[2]
+}
+
+# Get mean for pulled stats
+MeanAcc = colMeans(masterAcc)
+MeanSens = colMeans(masterSens)
+MeanSpcf = colMeans(masterSpcf)
+
+# Print stats
+MeanAcc</code></pre>
+<pre><code>## [1] 0.7806897</code></pre>
+<pre class="r"><code>MeanSens</code></pre>
+<pre><code>## [1] 0.6476431</code></pre>
+<pre class="r"><code>MeanSpcf</code></pre>
+<pre><code>## [1] 0.8062515</code></pre>
+</div>
+<div id="make-prediction-csv-for-attrition-comp-set" class="section level1">
+<h1>Make Prediction csv for Attrition Comp Set</h1>
+<pre class="r"><code>library(readxl)
+# Load Attrition Comp Set
+CaseStudy2CompSet_No_Attrition &lt;- read_csv(&quot;CaseStudy2CompSet No Attrition.csv&quot;)</code></pre>
+<pre><code>## 
+## -- Column specification ------------------------------------------------
+## cols(
+##   .default = col_double(),
+##   BusinessTravel = col_character(),
+##   Department = col_character(),
+##   EducationField = col_character(),
+##   Gender = col_character(),
+##   JobRole = col_character(),
+##   MaritalStatus = col_character(),
+##   Over18 = col_character(),
+##   OverTime = col_character()
+## )
+## [36mi[39m Use `spec()` for the full column specifications.</code></pre>
+<pre class="r"><code># Add Legacy column and unite &quot;Department&quot; and &quot;Jobrole&quot; column
+df_no_attr &lt;- as.data.frame(CaseStudy2CompSet_No_Attrition) %&gt;%
+  mutate(Legacy = YearsInCurrentRole*Education*StockOptionLevel*JobLevel*EnvironmentSatisfaction*RelationshipSatisfaction*MonthlyIncome/Age) %&gt;%
+  unite(&quot;DeptRole&quot;,Department, JobRole)
+
+# Create Model using &quot;features&quot; defined in previous code block
+model = naiveBayes(df[,features], df$Attrition)
+# Get and save model predictions with ID label, to table_predictions
+model_predictions = predict(model, df_no_attr[,features])</code></pre>
+<pre><code>## Warning in predict.naiveBayes(model, df_no_attr[, features]): Type
+## mismatch between training and new data for variable &#39;StockOptionLevel&#39;.
+## Did you use factors with numeric labels for training, and numeric values
+## for new data?</code></pre>
+<pre><code>## Warning in predict.naiveBayes(model, df_no_attr[, features]): Type
+## mismatch between training and new data for variable &#39;JobInvolvement&#39;.
+## Did you use factors with numeric labels for training, and numeric values
+## for new data?</code></pre>
+<pre class="r"><code>model_predictions = as.data.frame(model_predictions)
+df_no_attr_id = as.data.frame(df_no_attr$ID)
+
+# Renam columns
+colnames(model_predictions) &lt;- &quot;Attrition&quot;
+colnames(df_no_attr_id) &lt;- &quot;ID&quot;
+
+# Bind colummns
+attr_table_perdictions = cbind(df_no_attr_id, model_predictions)
+
+# Write table_perdictions to CSV
+write.csv(attr_table_perdictions, file = &quot;Case2PredictionsClassifyDawkins.csv&quot;, row.names=FALSE)</code></pre>
+</div>
+<div id="build-and-cross-validation-multiple-regression-model" class="section level1">
+<h1>Build and Cross Validation Multiple Regression Model</h1>
+<pre class="r"><code>df_salary &lt;- as.data.frame(CaseStudy2_data) %&gt;%
+  select(-all_of(removed_columns))
+
+# New Cross Validation 
+set.seed(4)
+
+
+## More Stable Measure ... Average of many MSPEs
+
+numMSPEs = 500
+RMSE = numeric(numMSPEs)
+AdjRSquared = numeric(numMSPEs)
+RSquared = numeric(numMSPEs)
+
+for (i in 1:numMSPEs)
+{
+  TrainObs = sample(seq(1,dim(df_salary)[1]),round(.75*dim(df_salary)[1]),replace = FALSE)
+  salary_train = df_salary[TrainObs,]
+  salary_test = df_salary[-TrainObs,]
+  
+  salary_model = lm(MonthlyIncome ~ TotalWorkingYears+BusinessTravel+
+             JobLevel*JobRole, data = salary_train)
+  
+  salary_model_predictions = predict(salary_model, newdata = salary_test)
+  
+  
+  RMSE[i] = sqrt(mean(salary_model$residuals^2))
+  RSquared[i] = summary(salary_model)$r.squared
+  AdjRSquared[i] = summary(salary_model)$adj.r.squared
+  
+}</code></pre>
+<pre><code>## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading
+
+## Warning in predict.lm(salary_model, newdata = salary_test): prediction
+## from a rank-deficient fit may be misleading</code></pre>
+<pre class="r"><code># R Squared
+mean(RMSE)</code></pre>
+<pre><code>## [1] 973.7647</code></pre>
+<pre class="r"><code># Adj R Squared
+mean(RSquared)</code></pre>
+<pre><code>## [1] 0.9549344</code></pre>
+<pre class="r"><code># Root Mean Square Error
+mean(AdjRSquared)</code></pre>
+<pre><code>## [1] 0.9535076</code></pre>
+</div>
+<div id="make-prediction-csv-for-attrition-comp-set-1" class="section level1">
+<h1>Make Prediction csv for Attrition Comp Set</h1>
+<pre class="r"><code>CaseStudy2CompSet_No_Salary &lt;- read_excel(&quot;CaseStudy2CompSet No Salary.xlsx&quot;)
+
+df_no_salary &lt;- as.data.frame(CaseStudy2CompSet_No_Salary)
+
+# Create MLR model, using data with a salary
+salary_model = lm(MonthlyIncome ~ TotalWorkingYears+BusinessTravel+
+           JobLevel*JobRole, data = df_salary)
+
+# Get and save model predictions with ID label, to table_predictions
+salary_model_predictions = predict(salary_model, newdata = df_no_salary)
+salary_model_predictions = as.data.frame(salary_model_predictions)
+
+# Save as Dataframe
+df_no_salary_id = as.data.frame(df_no_salary$ID)
+
+# Rename Columns
+colnames(salary_model_predictions) &lt;- &quot;MonthlyIncome&quot;
+colnames(df_no_salary_id) &lt;- &quot;ID&quot;
+
+# Bind columns
+salary_table_perdictions = cbind(df_no_salary_id, salary_model_predictions)
+
+# Write table_perdictions to CSV
+write.csv(salary_table_perdictions, file = &quot;Case2PredictionsRegressDawkins.csv&quot;, row.names=FALSE)</code></pre>
+<p>Executive Summary:</p>
+<p>The attrition model had an average accuracy of ~78%, an average specification of ~81% and an average sensitivity of ~65%. A Legacy attribute was derived from existing features in the data set and was applied to each employee, to aid in the predicting attrition.</p>
+<p>The salary model had root mean square error of $962 and Adj. R-squared of 94.8%.</p>
+<p>Other interesting trends: - There was no attrition amongst the human resource managers and 100% - Non managers, at 22%, have the second highest turnover rate</p>
+<ul>
+<li><p>All sales managers who left, left after 8-12 years with their current manager</p></li>
+<li><p>Sales Reps, at 45%, has the highest turnover rate</p></li>
+<li><p>R&amp;D Research Scientist who left,left the company within first 5 years in their current role</p></li>
+<li><p>R&amp;D Research Scientist ~20% and R&amp;D Lab Techs ~19% are have the third and fourth highest turnover rates</p></li>
+</ul>
+</div>
+<div id="appendix" class="section level1">
+<h1>Appendix:</h1>
+</div>
+<div id="get-box-plots-for-numerical-columns" class="section level1">
+<h1>Get Box Plots for Numerical Columns</h1>
+<pre class="r"><code># Initiate plot list
+plot_list &lt;- list()
+# Loop through numerical features and plot
+for (i in 1:ncol(df_nums)) {
+  plot_list[[i]] &lt;- df %&gt;%
+    ggplot(aes_string(y=colnames(df_nums)[i],x=&quot;DeptRole&quot;, color=&quot;Attrition&quot;))+
+    geom_boxplot()+
+    theme(axis.text.x=element_text(angle=45,hjust=1))
+
+}
+# Plot all plots in plot_list
+marrangeGrob(grobs = plot_list,
+                   nrow=1, ncol=1)</code></pre>
+<p><img src="main_files/figure-html/unnamed-chunk-10-1.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-2.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-3.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-4.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-5.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-6.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-7.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-8.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-9.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-10.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-11.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-12.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-13.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-14.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-15.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-10-16.png" width="672" /></p>
+</div>
+<div id="get-scatter-plots-for-numerical-columns" class="section level1">
+<h1>Get Scatter Plots for Numerical Columns</h1>
+<pre class="r"><code># Initiate plot list
+plot_list &lt;- list()
+# Loop through numerical features and plot
+for (i in 1:ncol(df_nums)) {
+  plot_list[[i]] &lt;- df %&gt;%
+    ggplot(aes_string(x=colnames(df_nums)[i], y=&quot;MonthlyIncome&quot;, color=&quot;Attrition&quot;))+
+    geom_point()
+
+}
+# Plot all plots in plot_list
+marrangeGrob(grobs = plot_list,
+                   nrow=3, ncol=2)</code></pre>
+<p><img src="main_files/figure-html/unnamed-chunk-11-1.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-11-2.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-11-3.png" width="672" /></p>
+</div>
+<div id="get-tile-plots-for-char_fac-columns" class="section level1">
+<h1>Get Tile Plots for Char_Fac Columns</h1>
+<pre class="r"><code># Initiate plot list
+plot_list &lt;- list()
+# Constant Variable 
+const_var &lt;- &quot;MaritalStatus&quot;
+# Loop through character factors and plot
+for (i in 1:ncol(df_char_fac)) {
+  plot_list[[i]] &lt;- df %&gt;%
+    dplyr::count(!!as.name(colnames(df_char_fac)[i]), !!as.name(const_var)) %&gt;%
+    ggplot(aes_string(x=colnames(df_char_fac)[i], y=const_var)) +
+    geom_tile(mapping=aes(fill=n))+
+    theme(axis.text.x=element_text(angle=90,hjust=1))
+
+}
+
+# Plot all plots in plot_list
+marrangeGrob(grobs = plot_list,
+                   nrow=1, ncol=1)</code></pre>
+<p><img src="main_files/figure-html/unnamed-chunk-12-1.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-2.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-3.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-4.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-5.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-6.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-7.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-8.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-9.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-10.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-11.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-12.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-13.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-14.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-15.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-16.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-12-17.png" width="672" /></p>
+</div>
+<div id="get-bar-graphs-fod-categorical" class="section level1">
+<h1>Get Bar Graphs fod Categorical</h1>
+<pre class="r"><code># Initiate plot list
+plot_list &lt;- list()
+
+# Loop through character factors and plot
+for (i in 1:ncol(df_char_fac)) {
+  plot_list[[i]] &lt;- df %&gt;%
+    ggplot(aes_string(x=colnames(df_char_fac)[i], fill=&quot;Attrition&quot;))+
+    geom_bar(position = &quot;dodge&quot;)+
+    theme(axis.text.x=element_text(angle=45,hjust=1))
+
+}
+# Plot all plots in plot_list
+marrangeGrob(grobs = plot_list,
+                   nrow=1, ncol=1)</code></pre>
+<p><img src="main_files/figure-html/unnamed-chunk-13-1.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-2.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-3.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-4.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-5.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-6.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-7.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-8.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-9.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-10.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-11.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-12.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-13.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-14.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-15.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-16.png" width="672" /><img src="main_files/figure-html/unnamed-chunk-13-17.png" width="672" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

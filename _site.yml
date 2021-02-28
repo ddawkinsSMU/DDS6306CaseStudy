@@ -1,12 +1,8 @@
-name: "cars"
-output_dir: "docs"
+name: "dj-lab"
 navbar:
-  title: "Cars"
+  title: "DJs Lab"
   left:
-  - text: "Home"
-   href: index.html
-  - text: "Speed and Distance"
-   href: speed-and-distance.html
-output:
-  html_document:
- theme: cosmo
+    - text: "Home"
+      href: index.html
+    - text: "DS6306: CaseStudy2"
+      href: main.html
