@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Welcome to DJ Dawkins GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/ddawkinsSMU/DS6306CaseStudy2/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
@@ -7,7 +7,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
+<a href="https://github.com/ddawkinsSMU/DS6306CaseStudy2/blob/master/main.pdf></a>
 ```markdown
 Syntax highlighted code block
 
@@ -23,7 +23,7 @@ Syntax highlighted code block
 
 **Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
+[https://github.com/ddawkinsSMU/DS6306CaseStudy2/blob/master/main.pdf](url) and ![Image](src)
 ```
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
