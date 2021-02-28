@@ -2,9 +2,7 @@
 title: "CaseStudy2"
 author: "Dawkins"
 date: "2/6/2021"
-output:
-  html_document: default
-  pdf_document: default
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -25,7 +23,7 @@ library(e1071)
 ## Load Data
 ```{r}
 
-CaseStudy2_data <- read_csv("C:/Users/OaklandHillsMansion/OneDrive - Southern Methodist University/SMU/MSDS_6306_Doing-Data-Science/Unit 14 and 15 CaseStudy2/CaseStudy2-data.csv")
+CaseStudy2_data <- read_csv("CaseStudy2-data.csv")
 
 # Columns that need to be removed
 removed_columns = c("ID", "EmployeeCount", "StandardHours")
@@ -153,7 +151,7 @@ MeanSpcf
 ```{r}
 library(readxl)
 # Load Attrition Comp Set
-CaseStudy2CompSet_No_Attrition <- read_csv("C:/Users/OaklandHillsMansion/Desktop/codeCAMP/SMU/CaseStudy2/CaseStudy2CompSet No Attrition.csv")
+CaseStudy2CompSet_No_Attrition <- read_csv("CaseStudy2CompSet No Attrition.csv")
 
 # Add Legacy column and unite "Department" and "Jobrole" column
 df_no_attr <- as.data.frame(CaseStudy2CompSet_No_Attrition) %>%
@@ -225,7 +223,7 @@ mean(AdjRSquared)
 
 # Make Prediction csv for Attrition Comp Set
 ```{r}
-CaseStudy2CompSet_No_Salary <- read_excel("C:/Users/OaklandHillsMansion/Desktop/codeCAMP/SMU/CaseStudy2/CaseStudy2CompSet No Salary.xlsx")
+CaseStudy2CompSet_No_Salary <- read_excel("CaseStudy2CompSet No Salary.xlsx")
 
 df_no_salary <- as.data.frame(CaseStudy2CompSet_No_Salary)
 
